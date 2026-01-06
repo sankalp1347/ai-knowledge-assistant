@@ -21,17 +21,17 @@ Unlike wrappers for paid APIs, this project leverages **Ollama (running Mistral)
 
 ## 🏗️ System Architecture
 
-The system follows a clean, layered architecture ensuring separation of concerns between authentication, business logic, and the AI engine.
+The system follows a layered architecture to separate authentication, business logic, and the AI engine.
 
 ```mermaid
 graph TD
-    Client[Client / Postman] -->|JWT Auth| Auth[DRF + SimpleJWT]
-    Auth --> API[REST API Layer]
-    API --> Logic[Business Logic & Permissions]
-    Logic --> LG[LangGraph Execution Flow]
-    LG --> LC[LangChain Retrieval]
-    LC -->|Context Search| FAISS[(FAISS Vector Store)]
-    LC -->|Prompting| Ollama[Local LLM (Mistral)]
+    Client["Client / Postman"] -->|JWT Auth| Auth["DRF + SimpleJWT"]
+    Auth --> API["REST API Layer"]
+    API --> Logic["Business Logic & Permissions"]
+    Logic --> LG["LangGraph Execution Flow"]
+    LG --> LC["LangChain Retrieval"]
+    LC -->|Context Search| FAISS[("FAISS Vector Store")]
+    LC -->|Prompting| Ollama["Local LLM (Mistral)"]
     Ollama -->|Response| Client
 
 ```
