@@ -1,175 +1,375 @@
+Here is your **renewed README with full React frontend integration added**, keeping it professional, production-level, and aligned with your backend and DevOps goals.
+
+You can **copy-paste directly**:
+
+---
+
 # 🤖 AI-Powered Document Assistant
 
-### *A Backend-First RAG System with Local LLM Inference*
+### *Full-Stack RAG System with Local LLM Inference (Django + React + Ollama)*
 
-A high-performance, secure backend API built with **Django REST Framework** that combines standard document management with cutting-edge AI capabilities.
+A production-ready full-stack AI application combining **secure document management** with **local AI intelligence** using Retrieval-Augmented Generation (RAG).
 
-Unlike wrappers for paid APIs, this project leverages **Ollama (running Mistral)** for 100% local, privacy-focused, and cost-free AI inference. It features a robust RAG (Retrieval-Augmented Generation) pipeline orchestrated by **LangGraph**, ensuring answers are strictly grounded in your uploaded documents.
-
----
-
-## 🚀 Key Features
-
-* **🔐 Secure Authentication:** Full JWT implementation (Registration & Login) using `simplejwt`.
-* **📂 Document Management:** Complete CRUD operations with user-level data isolation.
-* **🧠 Local AI Intelligence:** Zero-cost inference using **Mistral** via Ollama. No API keys, no rate limits.
-* **⚡ Context-Aware QA:** AI answers questions based *strictly* on document context using RAG (FAISS + Embeddings).
-* **⚙️ Advanced Control Flow:** Uses **LangGraph** to manage AI execution logic and state.
-* **📉 Resource Optimized:** Designed to run efficiently on low-RAM systems.
+This system uses a **Django REST backend**, a modern **React + Vite frontend**, and a **local Mistral LLM via Ollama**, ensuring complete privacy, zero API costs, and full control over AI inference.
 
 ---
 
-## 🏗️ System Architecture
+# 🚀 Key Features
 
-The system follows a layered architecture to separate authentication, business logic, and the AI engine.
+## 🔐 Authentication
+
+* Secure JWT-based authentication
+* User registration and login
+* Protected API endpoints
+* Token-based session persistence
+
+## 📂 Document Management
+
+* Create, read, update, delete documents
+* User-specific document isolation
+* Real-time document refresh
+* Secure backend validation
+
+## 🧠 AI Intelligence (Local, Private, Free)
+
+* Local inference using Ollama (Mistral model)
+* No OpenAI or paid API required
+* No rate limits
+* Fully offline capable
+
+## ⚡ Retrieval-Augmented Generation (RAG)
+
+* FAISS vector search
+* Ollama embeddings
+* Context-aware AI answers
+* LangChain orchestration
+
+## 💻 Modern React Frontend
+
+* Built with React + Vite
+* JWT authentication flow
+* Axios service architecture
+* Secure API integration
+* Modular, scalable structure
+
+## 🛡️ Secure and Production-Ready Architecture
+
+* Backend authorization enforcement
+* API-based frontend communication
+* Service-based frontend architecture
+* DevOps-ready structure
+
+---
+
+# 🏗️ System Architecture
 
 ```mermaid
 graph TD
-    Client["Client / Postman"] -->|JWT Auth| Auth["DRF + SimpleJWT"]
-    Auth --> API["REST API Layer"]
-    API --> Logic["Business Logic & Permissions"]
-    Logic --> LG["LangGraph Execution Flow"]
-    LG --> LC["LangChain Retrieval"]
-    LC -->|Context Search| FAISS[("FAISS Vector Store")]
-    LC -->|Prompting| Ollama["Local LLM (Mistral)"]
-    Ollama -->|Response| Client
 
+User["React Frontend (Vite + Axios)"]
+User -->|JWT Login/Register| DjangoAuth["Django Auth (SimpleJWT)"]
+
+User -->|CRUD Documents| DjangoAPI["Django REST API"]
+
+User -->|Ask Question| AIAPI["AI Engine Endpoint"]
+
+AIAPI --> LangChain["LangChain Pipeline"]
+LangChain --> FAISS["FAISS Vector Store"]
+LangChain --> Ollama["Ollama (Mistral LLM)"]
+
+Ollama --> Response["AI Response"]
+Response --> User
 ```
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
 
-| Domain | Technology Used |
-| --- | --- |
-| **Backend Framework** | Python 3.11+, Django, Django REST Framework |
-| **Authentication** | JWT (`djangorestframework-simplejwt`) |
-| **AI Orchestration** | LangChain, LangGraph |
-| **Vector Search** | FAISS (Facebook AI Similarity Search) |
-| **LLM Inference** | Ollama (Model: Mistral) |
-| **Database** | SQLite (Development) |
-| **Tools** | Postman, Git |
+## Backend
+
+* Python 3.11+
+* Django
+* Django REST Framework
+* SimpleJWT
+
+## Frontend
+
+* React 18
+* Vite
+* TypeScript
+* Axios
+
+## AI Stack
+
+* Ollama
+* Mistral model
+* LangChain
+* FAISS
+
+## Database
+
+* SQLite (Development)
+* PostgreSQL (Production ready)
+
+## DevOps Ready
+
+* Docker (planned)
+* Jenkins CI/CD (planned)
+* GitHub integration
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-```text
-ai_knowledge_assistant/
-├── accounts/               # Authentication APIs (Register/Login)
-├── documents/              # Document CRUD & Permissions
-├── ai_engine/              # RAG Logic (LangChain + LangGraph)
-├── ai_knowledge_assistant/ # Core Settings & URL Routing
+```
+ai-knowledge-assistant/
+
+backend/
+│
+├── accounts/
+├── documents/
+├── ai_engine/
+├── ai_knowledge_assistant/
 ├── manage.py
-└── requirements.txt
+├── requirements.txt
+└── venv/
 
+frontend/
+│
+├── src/
+│   ├── api/
+│   ├── services/
+│   ├── components/
+│   ├── pages/
+│   └── App.tsx
+│
+├── package.json
+├── vite.config.ts
+└── index.html
 ```
 
 ---
 
-## ⚡ Getting Started
+# ⚡ Setup Guide
 
-### 1. Prerequisites (The AI Engine)
+# 1. Install Ollama and Mistral
 
-This project requires **Ollama** to run the AI model locally.
+Download Ollama:
 
-1. Download Ollama from [ollama.com](https://ollama.com/download).
-2. Pull the Mistral model:
-```bash
-ollama pull mistral
+[https://ollama.com/download](https://ollama.com/download)
+
+Pull model:
 
 ```
+ollama pull mistral
+```
 
+Start Ollama:
 
-3. Ensure Ollama is running in the background.
+```
+ollama run mistral
+```
 
-### 2. Backend Setup
+Leave it running.
 
-clone the repository and set up the Python environment:
+---
 
-```bash
-# 1. Create virtual environment
+# 2. Backend Setup
+
+```
+cd backend
+
 python -m venv venv
 
-# 2. Activate environment
-# Windows:
 venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
 
-# 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Apply migrations
-python manage.py makemigrations
 python manage.py migrate
 
-# 5. Start the server
 python manage.py runserver
-
 ```
 
-*The server will start at `http://127.0.0.1:8000*`
+Backend runs at:
+
+```
+http://127.0.0.1:8000
+```
 
 ---
 
-## 📡 API Reference
+# 3. Frontend Setup
 
-All protected endpoints require the header: `Authorization: Bearer <access_token>`
+```
+cd frontend
 
-### 👤 Authentication
+npm install
 
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| `POST` | `/api/auth/register/` | Register a new user |
-| `POST` | `/api/auth/login/` | Login and receive JWT tokens |
+npm run dev
+```
 
-### 📄 Documents (Protected)
+Frontend runs at:
 
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| `POST` | `/api/documents/` | Upload/Create a new document |
-| `GET` | `/api/documents/` | List all user documents |
-| `GET` | `/api/documents/{id}/` | Retrieve specific document details |
-| `PUT/PATCH` | `/api/documents/{id}/` | Update a document |
-| `DELETE` | `/api/documents/{id}/` | Delete a document |
+```
+http://localhost:5173
+```
 
-### 🤖 AI Question Answering
+---
 
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| `POST` | `/api/ask/` | Ask a question about a specific document |
+# 🔐 Authentication Flow
 
-**Sample AI Request Body:**
+Login:
 
-```json
+```
+POST /api/auth/login/
+```
+
+Response:
+
+```
+access_token stored in localStorage
+```
+
+Frontend automatically sends token via Axios interceptor:
+
+```
+Authorization: Bearer <token>
+```
+
+---
+
+# 📡 API Reference
+
+## Authentication
+
+```
+POST /api/auth/register/
+POST /api/auth/login/
+```
+
+---
+
+## Documents
+
+```
+GET /api/documents/
+POST /api/documents/
+PUT /api/documents/{id}/
+DELETE /api/documents/{id}/
+```
+
+---
+
+## AI Question Answering
+
+```
+POST /api/ask/
+```
+
+Request:
+
+```
 {
-    "document_id": 1,
-    "question": "What are the core concepts of LangChain?"
+  "document_id": 1,
+  "question": "Explain the main concept"
 }
+```
 
+Response:
+
+```
+{
+  "answer": "AI generated answer based on document context"
+}
 ```
 
 ---
 
-## 🧠 How the AI Works
+# 🧠 How the AI Works
 
-1. **Ingestion:** When a question is asked, the system reads the target document.
-2. **Embedding:** Text is converted into vector embeddings.
-3. **Retrieval:** FAISS retrieves the specific paragraphs relevant to the user's question.
-4. **Synthesis:** LangGraph constructs a prompt containing the question and the retrieved context.
-5. **Generation:** The local Mistral model generates an answer based *only* on the provided context.
+Step 1: Document stored in database
 
----
+Step 2: Question sent from React frontend
 
-## 🔮 Future Roadmap
+Step 3: Django sends document to LangChain
 
-* [ ] Frontend integration (React/Vue)
-* [ ] Persistent vector storage (pgvector or ChromaDB)
-* [ ] Role-Based Access Control (RBAC)
-* [ ] Docker & Docker Compose support
-* [ ] Fallback support for Cloud LLMs (OpenAI/Anthropic)
+Step 4: FAISS retrieves relevant context
+
+Step 5: Ollama generates response locally
+
+Step 6: Response returned to frontend
 
 ---
 
-**Author:** AI + Backend Engineering Mini Project
+# 💻 Frontend Architecture
+
+Frontend uses service-based architecture:
+
+```
+api/
+  http.ts            → Axios instance
+
+services/
+  authService.ts    → Login/Register
+  documentService.ts → CRUD operations
+  aiService.ts      → AI requests
+
+components/
+  DashboardPage.tsx
+  CreateDocumentPage.tsx
+  AskAIPage.tsx
+```
+
+Advantages:
+
+* clean separation
+* scalable
+* production-ready
+
+---
+
+# 🔒 Security Features
+
+* JWT authentication
+* Protected API routes
+* Token interceptor
+* User data isolation
+* Backend permission enforcement
+
+---
+
+# ⚡ Performance Features
+
+* Local AI inference
+* No network latency to OpenAI
+* Fast vector retrieval using FAISS
+* Optimized for low RAM systems
+
+---
+
+# 🚀 DevOps Ready
+
+Designed for:
+
+* Docker containerization
+* Jenkins CI/CD pipelines
+* Production deployment
+* Nginx / Apache hosting
+
+---
+
+# 🔮 Future Improvements
+
+* Docker support
+* PostgreSQL integration
+* Redis caching
+* CI/CD pipeline with Jenkins
+* Production deployment configs
+* Role-based access control
+
+---
+
+# 👨‍💻 Author
+
+AI Document Assistant
+Full-Stack AI + Django + React + DevOps Project
