@@ -1,6 +1,3 @@
-Here is your **renewed README with full React frontend integration added**, keeping it professional, production-level, and aligned with your backend and DevOps goals.
-
-You can **copy-paste directly**:
 
 ---
 
